@@ -10,5 +10,304 @@ struct ListNode {
  };
  ```
 
-## Linked List Cycle
+## 0. Linked List Cycle
+```
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        ListNode* p = head, *t = head;
+        int i, j;
+        if (p) {
+            for (i = 0; p->next; p = p->next, i++) {
+                for (j = 0, t = head; p != t; t = t->next, j++);
+                    if (i != j)
+                        return true;
+            }
+        }
+        return false;
+    }
+};
+```
 
+## 0. Linked List Cycle II
+```
+class Solution {
+public:
+    ListNode *detectCycle(ListNode *head) {
+        ListNode* p = head, *t = head;
+        int i, j;
+        if (p) {
+            for (i = 0; p->next; p = p->next, i++) {
+                for (j = 0, t = head; p != t; t = t->next, j++);
+                    if (i != j)
+                        return t;
+            }
+        }
+        return NULL;
+    }
+};
+```
+
+## 0. Merge Two Sorted Lists
+```
+class Solution {
+public:
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        ListNode* result = NULL, *buf = NULL;
+        if (l1 && l2) {
+            if (l1->val < l2->val) {
+                result = l1;
+                l1 = l1->next;
+            }
+            else {
+                result = l2;
+                l2 = l2->next;
+            }
+            buf = result;
+            while (l1 && l2) {
+                if (l1->val < l2->val) {
+                    buf->next = l1;
+                    l1 = l1->next;
+                }
+                else {
+                    buf->next = l2;
+                    l2 = l2->next;
+                }
+                buf = buf->next;
+            }
+        }
+        if (!(l1 || l2))
+            return result;
+        if (!l2) {
+            if (!buf) {
+                buf = l1;
+                l1 = l1->next;
+                result = buf;
+            }
+            while (l1) {
+                buf->next = l1;
+                buf = buf->next;
+                l1 = l1->next;
+            }
+        }
+        else if (!l1) {
+            if (!buf) {
+                buf = l2;
+                l2 = l2->next;
+                result = buf;
+            }
+            while (l2) {
+                buf->next = l2;
+                buf = buf->next;
+                l2 = l2->next;
+            }
+        }
+        return result;
+    }
+};
+```
+
+## 0. Remove Nth Node From End of List
+```
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) {
+        ListNode* p = head, *t = head;
+        if (n == 1) {
+            if (p->next) {
+                while (p->next->next) {
+                    p = p->next;
+                }
+                p->next = NULL;
+                return head;
+            }
+            return NULL;
+        }
+        while (p->next) {
+            n--;
+            if (n < 0)
+                t = t->next;
+            p = p->next;
+        }
+        if (n > 0) {
+            while (n > 0) {
+                head = head->next;
+                n--;
+            }
+        }
+        else if (t->next)
+            t->next = t->next->next;
+        else 
+            t = NULL;
+        return head;
+    }
+};
+```
+
+## 0. Middle of the Linked List
+### Version 1:
+```
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        ListNode* buf = head;
+        int i;
+        for (i = 0; buf->next; buf = buf->next, i++);
+        i = i / 2 + i % 2;
+        for (buf = head; i > 0; i--) 
+            buf = buf->next;
+        return buf;
+    }
+};
+```
+### Version 2:
+```
+
+```
+
+## 0. Delete Node in a Linked List
+```
+class Solution {
+public:
+    void deleteNode(ListNode* node) {
+        node->val = node->next->val;
+        node->next = node->next->next;
+    }
+};
+```
+
+## 0. Palindrome Linked List
+```
+class Solution {
+public:
+    bool isPalindrome(ListNode* head) {
+        ListNode* middle;
+        if (!head)
+            return true;
+        if (!head->next)
+            return true;
+        middle = GetMiddle(head);
+        middle = ReverseList(middle);
+        while (head && middle) {
+            if (head->val != middle->val)
+                return false;
+            head = head->next;
+            middle = middle->next;
+        }
+        return true;
+    }
+private:
+    ListNode* GetMiddle(ListNode* head) {
+        ListNode* p = head, *t = head;
+        while (p && p->next) {
+            p = p->next->next;
+            t = t->next;
+        }
+        return t;
+    }
+    ListNode* ReverseList(ListNode* head) {
+        ListNode* buf = head;
+        if (buf) {
+            while (buf->next)
+                buf = buf->next;
+            RecursiveThing(head);
+        }
+        return buf;
+    }
+    void RecursiveThing(ListNode* node) {
+        if (!node->next)
+            return;
+        else 
+            RecursiveThing(node->next);
+        node->next->next = node;
+        node->next = NULL;
+    }
+};
+```
+
+## 0. Reverse Linked List
+```
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* buf = head;
+        if (buf) {
+            while (buf->next)
+                buf = buf->next;
+            RecursiveThing(head);
+        }
+        return buf;
+    }
+private:
+    void RecursiveThing(ListNode* node) {
+        if (!node->next)
+            return;
+        else 
+            RecursiveThing(node->next);
+        node->next->next = node;
+        node->next = NULL;
+    }
+};
+```
+
+## 0. Remove Linked List Elements
+```
+class Solution {
+public:
+    ListNode* removeElements(ListNode* head, int val) {
+        ListNode* buf, *oneMoreBuf = head;
+        if (head) {
+            buf = head->next;
+            if (buf) {
+                while (head && head->val == val) {
+                    head = buf;
+                    oneMoreBuf = buf;
+                    if (buf)
+                        buf = buf->next;
+                }
+                while (buf) {
+                    if (buf->val == val) {
+                        oneMoreBuf->next = buf->next;
+                        buf = buf->next;
+                        continue;
+                    }
+                    oneMoreBuf = buf;
+                    buf = buf->next;
+                }
+            }
+            else if (head->val == val)
+                return NULL;
+        }
+        return head;
+    }
+};
+```
+
+## 0. Intersection of Two Linked Lists
+```
+class Solution {
+public:
+    ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
+        int counterA, counterB;
+        ListNode* bufA = headA, *bufB = headB;
+        for (counterA = 0; bufA; counterA++)
+            bufA = bufA->next;
+        for (counterB = 0; bufB; counterB++)
+            bufB = bufB->next;
+        counterA = counterA - counterB;
+        counterB = counterA < 0 ? -counterA : 0;
+        counterA = counterB ? 0 : counterA;
+        for (;counterA > 0; counterA--) {
+            headA = headA->next;
+        }
+        for (;counterB > 0; counterB--) {
+            headB = headB->next;
+        }
+        while (headA != headB) {
+            headA = headA->next;
+            headB = headB->next;
+        }
+        return headA;
+    }
+};
+```
