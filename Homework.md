@@ -9,6 +9,86 @@ struct ListNode {
      ListNode(int x) : val(x), next(NULL) {}  
  };
  ```
+## Reorder List
+### Cozy slow way
+```
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        ListNode* junBuf = head, *senBuf, *newTailBuf;
+        if (head) {
+            while (junBuf->next) {
+                senBuf = junBuf;
+                while (senBuf->next) {
+                    newTailBuf = senBuf;
+                    senBuf = senBuf->next;
+                }
+                if (junBuf->next == senBuf || junBuf == senBuf)
+                    break;
+                senBuf->next = junBuf->next;
+                junBuf->next = senBuf;
+                newTailBuf->next = NULL;
+                junBuf = senBuf->next;
+            }
+        }
+    }
+};
+```
+### Little bit faster
+```
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        ListNode* middle, *buf = head;
+        if (head) {
+            middle = GetMiddle(head);
+            if (middle == head)
+                return;
+            while (buf->next != middle) {
+                buf = buf->next;
+            }
+            buf->next = NULL;
+            middle = reverseList(middle);
+            while (middle && head) {
+                buf = middle->next;
+                middle->next = head->next;
+                head->next = middle;
+                head = middle->next ? middle->next : middle;
+                middle = buf;
+            }
+        }
+    }
+    
+private:
+    ListNode* GetMiddle(ListNode* head) {
+        ListNode* p = head, *t = head;
+        while (p && p->next) {
+            p = p->next->next;
+            t = t->next;
+        }
+        return t;
+    }
+    
+    ListNode* reverseList(ListNode* head) {
+        ListNode* buf = head;
+        if (buf) {
+            while (buf->next)
+                buf = buf->next;
+            RecursiveThing(head);
+        }
+        return buf;
+    }
+    
+    void RecursiveThing(ListNode* node) {
+        if (!node->next)
+            return;
+        else 
+            RecursiveThing(node->next);
+        node->next->next = node;
+        node->next = NULL;
+    }
+};
+```
 
 ## Linked List Cycle
 ```
