@@ -10,7 +10,7 @@ struct ListNode {
  };
  ```
 
-## 0. Linked List Cycle
+## Linked List Cycle
 ```
 class Solution {
 public:
@@ -29,7 +29,7 @@ public:
 };
 ```
 
-## 0. Linked List Cycle II
+## Linked List Cycle II
 ```
 class Solution {
 public:
@@ -48,7 +48,7 @@ public:
 };
 ```
 
-## 0. Merge Two Sorted Lists
+## Merge Two Sorted Lists
 ```
 class Solution {
 public:
@@ -107,7 +107,7 @@ public:
 };
 ```
 
-## 0. Remove Nth Node From End of List
+## Remove Nth Node From End of List
 ```
 class Solution {
 public:
@@ -144,7 +144,7 @@ public:
 };
 ```
 
-## 0. Middle of the Linked List
+## Middle of the Linked List
 ### Version 1:
 ```
 class Solution {
@@ -162,10 +162,20 @@ public:
 ```
 ### Version 2:
 ```
-
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        ListNode* p = head, *t = head;
+        while (p && p->next) {
+            p = p->next->next;
+            t = t->next;
+        }
+        return t;
+    }
+};
 ```
 
-## 0. Delete Node in a Linked List
+## Delete Node in a Linked List
 ```
 class Solution {
 public:
@@ -176,7 +186,7 @@ public:
 };
 ```
 
-## 0. Palindrome Linked List
+## Palindrome Linked List
 ```
 class Solution {
 public:
@@ -225,7 +235,7 @@ private:
 };
 ```
 
-## 0. Reverse Linked List
+## Reverse Linked List
 ```
 class Solution {
 public:
@@ -250,7 +260,7 @@ private:
 };
 ```
 
-## 0. Remove Linked List Elements
+## Remove Linked List Elements
 ```
 class Solution {
 public:
@@ -283,7 +293,7 @@ public:
 };
 ```
 
-## 0. Intersection of Two Linked Lists
+## Intersection of Two Linked Lists
 ```
 class Solution {
 public:
