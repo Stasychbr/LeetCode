@@ -350,11 +350,9 @@ public:
             buf = head->next;
             if (buf) {
                 while (head && head->val == val) {
-                    head = buf;
-                    oneMoreBuf = buf;
-                    if (buf)
-                        buf = buf->next;
+                    head = head->next;
                 }
+                buf = oneMoreBuf = head;
                 while (buf) {
                     if (buf->val == val) {
                         oneMoreBuf->next = buf->next;
