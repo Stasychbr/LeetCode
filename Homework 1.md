@@ -2,7 +2,7 @@
 
 Definition for singly-linked list:
 
-``` 
+```C++ 
 struct ListNode {
      int val;
      ListNode *next;
@@ -11,7 +11,7 @@ struct ListNode {
  ```
 ## Reorder List
 ### Cozy slow way
-```
+```C++
 class Solution {
 public:
     void reorderList(ListNode* head) {
@@ -35,7 +35,7 @@ public:
 };
 ```
 ### Little bit faster
-```
+```C++
 class Solution {
 public:
     void reorderList(ListNode* head) {
@@ -91,7 +91,7 @@ private:
 ```
 
 ## Linked List Cycle
-```
+```C++
 class Solution {
 public:
     bool hasCycle(ListNode *head) {
@@ -110,7 +110,7 @@ public:
 ```
 
 ## Linked List Cycle II
-```
+```C++
 class Solution {
 public:
     ListNode *detectCycle(ListNode *head) {
@@ -129,7 +129,7 @@ public:
 ```
 
 ## Merge Two Sorted Lists
-```
+```C++
 class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
@@ -188,7 +188,7 @@ public:
 ```
 
 ## Remove Nth Node From End of List
-```
+```C++
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
@@ -226,7 +226,7 @@ public:
 
 ## Middle of the Linked List
 ### Version 1:
-```
+```C++
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
@@ -241,7 +241,7 @@ public:
 };
 ```
 ### Version 2:
-```
+```C++
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
@@ -256,7 +256,7 @@ public:
 ```
 
 ## Delete Node in a Linked List
-```
+```C++
 class Solution {
 public:
     void deleteNode(ListNode* node) {
@@ -267,7 +267,7 @@ public:
 ```
 
 ## Palindrome Linked List
-```
+```C++
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
@@ -316,7 +316,7 @@ private:
 ```
 
 ## Reverse Linked List
-```
+```C++
 class Solution {
 public:
     ListNode* reverseList(ListNode* head) {
@@ -341,7 +341,7 @@ private:
 ```
 
 ## Remove Linked List Elements
-```
+```C++
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
@@ -374,7 +374,7 @@ public:
 ```
 
 ## Intersection of Two Linked Lists
-```
+```C++
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
