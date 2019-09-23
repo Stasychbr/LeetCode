@@ -232,7 +232,8 @@ public:
     ListNode* middleNode(ListNode* head) {
         ListNode* buf = head;
         int i;
-        for (i = 0; buf->next; buf = buf->next, i++);
+        for (i = 0; buf->next; i++)
+          buf = buf->next;
         i = i / 2 + i % 2;
         for (buf = head; i > 0; i--) 
             buf = buf->next;
@@ -396,6 +397,83 @@ public:
             headB = headB->next;
         }
         return headA;
+    }
+};
+```
+
+## Sort List
+```C++
+class Solution {
+public:
+    ListNode* sortList(ListNode* head) {
+        if (!(head && head->next))
+            return head;
+        return mergeTwoLists(sortList(head), sortList(SplitList(head)));
+    }
+    
+private:
+    ListNode* SplitList(ListNode* head) {
+        ListNode* p = head, *t = head, *annihilator;
+        while (p && p->next) {
+            p = p->next->next;
+            annihilator = t;
+            t = t->next;
+        }
+        annihilator->next = NULL;
+        return t;
+    }
+    
+    ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
+        ListNode* result = NULL, *buf = NULL;
+        if (l1 && l2) {
+            if (l1->val < l2->val) {
+                result = l1;
+                l1 = l1->next;
+            }
+            else {
+                result = l2;
+                l2 = l2->next;
+            }
+            buf = result;
+            while (l1 && l2) {
+                if (l1->val < l2->val) {
+                    buf->next = l1;
+                    l1 = l1->next;
+                }
+                else {
+                    buf->next = l2;
+                    l2 = l2->next;
+                }
+                buf = buf->next;
+            }
+        }
+        if (!(l1 || l2))
+            return result;
+        if (!l2) {
+            if (!buf) {
+                buf = l1;
+                l1 = l1->next;
+                result = buf;
+            }
+            while (l1) {
+                buf->next = l1;
+                buf = buf->next;
+                l1 = l1->next;
+            }
+        }
+        else if (!l1) {
+            if (!buf) {
+                buf = l2;
+                l2 = l2->next;
+                result = buf;
+            }
+            while (l2) {
+                buf->next = l2;
+                buf = buf->next;
+                l2 = l2->next;
+            }
+        }
+        return result;
     }
 };
 ```
