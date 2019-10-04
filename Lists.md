@@ -91,6 +91,7 @@ private:
 ```
 
 ## Linked List Cycle
+### Dumb way
 ```C++
 class Solution {
 public:
@@ -105,6 +106,27 @@ public:
             }
         }
         return false;
+    }
+};
+```
+
+### Knuth's way
+``` C++
+class Solution {
+public:
+    bool hasCycle(ListNode *head) {
+        if(!head)
+            return false;
+        ListNode* slowPointer = head;
+        ListNode* fastPointer = head;
+        do {
+            slowPointer = slowPointer->next;
+            fastPointer = fastPointer->next;
+            if(!fastPointer)
+                return false;
+            fastPointer = fastPointer->next;
+        } while(fastPointer && fastPointer != slowPointer);
+        return fastPointer && slowPointer;
     }
 };
 ```
