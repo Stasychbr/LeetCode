@@ -61,12 +61,12 @@ public:
     
 private:
     ListNode* GetMiddle(ListNode* head) {
-        ListNode* p = head, *t = head;
-        while (p && p->next) {
-            p = p->next->next;
-            t = t->next;
+        ListNode* fast = head, *slow = head;
+        while (fast && fast->next) {
+            fast = fast->next->next;
+            slow = slow->next;
         }
-        return t;
+        return slow;
     }
     
     ListNode* reverseList(ListNode* head) {
@@ -156,54 +156,28 @@ class Solution {
 public:
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         ListNode* result = NULL, *buf = NULL;
-        if (l1 && l2) {
-            if (l1->val < l2->val) {
+        if (l1 && (!l2 || l1->val < l2->val)) {
                 result = l1;
+                l1 = l1->next;
+        }
+        else if (l2 && (!l1 || l2->val <= l1->val)) {
+                result = l2;
+                l2 = l2->next;
+        }
+        buf = result;
+        while (l1 && l2) {
+            if (l1->val < l2->val) {
+                buf->next = l1;
                 l1 = l1->next;
             }
             else {
-                result = l2;
-                l2 = l2->next;
-            }
-            buf = result;
-            while (l1 && l2) {
-                if (l1->val < l2->val) {
-                    buf->next = l1;
-                    l1 = l1->next;
-                }
-                else {
-                    buf->next = l2;
-                    l2 = l2->next;
-                }
-                buf = buf->next;
-            }
-        }
-        if (!(l1 || l2))
-            return result;
-        if (!l2) {
-            if (!buf) {
-                buf = l1;
-                l1 = l1->next;
-                result = buf;
-            }
-            while (l1) {
-                buf->next = l1;
-                buf = buf->next;
-                l1 = l1->next;
-            }
-        }
-        else if (!l1) {
-            if (!buf) {
-                buf = l2;
-                l2 = l2->next;
-                result = buf;
-            }
-            while (l2) {
                 buf->next = l2;
-                buf = buf->next;
                 l2 = l2->next;
             }
+            buf = buf->next;
         }
+        if (buf)
+            buf->next = l1 ? l1 : l2;       
         return result;
     }
 };
@@ -214,7 +188,7 @@ public:
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        ListNode* p = head, *t = head;
+        ListNode* p = head, *t = head, *buf;
         if (n == 1) {
             if (p->next) {
                 while (p->next->next) {
@@ -232,15 +206,15 @@ public:
             p = p->next;
         }
         if (n > 0) {
-            while (n > 0) {
-                head = head->next;
-                n--;
-            }
+            buf = head->next;
+            delete(head);
+            head = buf;
         }
-        else if (t->next)
-            t->next = t->next->next;
-        else 
-            t = NULL;
+        else if (t->next) {
+            buf = t->next->next;
+            delete(t->next);
+            t->next = buf;
+        }
         return head;
     }
 };
@@ -301,7 +275,7 @@ public:
             return true;
         middle = GetMiddle(head);
         middle = ReverseList(middle);
-        while (head && middle) {
+        while (middle) {
             if (head->val != middle->val)
                 return false;
             head = head->next;
@@ -311,12 +285,11 @@ public:
     }
 private:
     ListNode* GetMiddle(ListNode* head) {
-        ListNode* p = head, *t = head;
-        while (p && p->next) {
-            p = p->next->next;
-            t = t->next;
+        ListNode* fast = head, *slow = head;
+        while (fast && fast->next) {
+            fast = fast->next->next;
+            slow = slow->next;
         }
-        return t;
     }
     ListNode* ReverseList(ListNode* head) {
         ListNode* buf = head;
@@ -339,6 +312,7 @@ private:
 ```
 
 ## Reverse Linked List
+### Recursive way
 ```C++
 class Solution {
 public:
@@ -359,6 +333,25 @@ private:
             RecursiveThing(node->next);
         node->next->next = node;
         node->next = NULL;
+    }
+};
+```
+### Iterative way
+``` C++
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        ListNode* current = head, *previous = NULL;
+        if (head) 
+            head = head->next;
+        while (current) {
+            current->next = previous;
+            previous = current;
+            current = head;
+            if (head)
+                head = head->next;
+        }
+        return previous;
     }
 };
 ```
@@ -435,67 +428,39 @@ public:
     
 private:
     ListNode* SplitList(ListNode* head) {
-        ListNode* p = head, *t = head, *annihilator;
-        while (p && p->next) {
-            p = p->next->next;
-            annihilator = t;
-            t = t->next;
+        ListNode* current = head, *previous = head, *annihilator;
+        while (current && current->next) {
+            current = current->next->next;
+            annihilator = previous;
+            previous = previous->next;
         }
         annihilator->next = NULL;
-        return t;
+        return previous;
     }
-    
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         ListNode* result = NULL, *buf = NULL;
-        if (l1 && l2) {
-            if (l1->val < l2->val) {
+        if (l1 && (!l2 || l1->val < l2->val)) {
                 result = l1;
+                l1 = l1->next;
+        }
+        else if (l2 && (!l1 || l2->val <= l1->val)) {
+                result = l2;
+                l2 = l2->next;
+        }
+        buf = result;
+        while (l1 && l2) {
+            if (l1->val < l2->val) {
+                buf->next = l1;
                 l1 = l1->next;
             }
             else {
-                result = l2;
-                l2 = l2->next;
-            }
-            buf = result;
-            while (l1 && l2) {
-                if (l1->val < l2->val) {
-                    buf->next = l1;
-                    l1 = l1->next;
-                }
-                else {
-                    buf->next = l2;
-                    l2 = l2->next;
-                }
-                buf = buf->next;
-            }
-        }
-        if (!(l1 || l2))
-            return result;
-        if (!l2) {
-            if (!buf) {
-                buf = l1;
-                l1 = l1->next;
-                result = buf;
-            }
-            while (l1) {
-                buf->next = l1;
-                buf = buf->next;
-                l1 = l1->next;
-            }
-        }
-        else if (!l1) {
-            if (!buf) {
-                buf = l2;
-                l2 = l2->next;
-                result = buf;
-            }
-            while (l2) {
                 buf->next = l2;
-                buf = buf->next;
                 l2 = l2->next;
             }
+            buf = buf->next;
         }
+        if (buf)
+            buf->next = l1 ? l1 : l2;       
         return result;
     }
-};
 ```
