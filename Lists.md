@@ -257,8 +257,10 @@ public:
 class Solution {
 public:
     void deleteNode(ListNode* node) {
+        ListNode* buf = node->next;
         node->val = node->next->val;
         node->next = node->next->next;
+        delete(buf);
     }
 };
 ```
