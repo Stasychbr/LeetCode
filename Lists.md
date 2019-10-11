@@ -242,12 +242,12 @@ public:
 class Solution {
 public:
     ListNode* middleNode(ListNode* head) {
-        ListNode* p = head, *t = head;
-        while (p && p->next) {
-            p = p->next->next;
-            t = t->next;
+        ListNode* fast = head, *slow = head;
+        while (fast && fast->next) {
+            fast = fast->next->next;
+            slow = slow->next;
         }
-        return t;
+        return slow;
     }
 };
 ```
