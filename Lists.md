@@ -15,8 +15,8 @@ struct ListNode {
 class Solution {
 public:
     void reorderList(ListNode* head) {
-        ListNode* junBuf = head, *senBuf, *newTailBuf;
-        if (head) {
+        if (head) {  
+            ListNode* junBuf = head, *senBuf, *newTailBuf;
             while (junBuf->next) {
                 senBuf = junBuf;
                 while (senBuf->next) {
@@ -39,8 +39,8 @@ public:
 class Solution {
 public:
     void reorderList(ListNode* head) {
-        ListNode* middle, *buf = head;
         if (head) {
+            ListNode* middle, *buf = head;   
             middle = getMiddle(head);
             if (middle == head)
                 return;
