@@ -394,15 +394,15 @@ public:
 class Solution {
 public:
     ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
-        int counterA, counterB;
+        int counterA, counterB, delta;
         ListNode* bufA = headA, *bufB = headB;
         for (counterA = 0; bufA; counterA++)
             bufA = bufA->next;
         for (counterB = 0; bufB; counterB++)
             bufB = bufB->next;
-        counterA = counterA - counterB;
-        counterB = counterA < 0 ? -counterA : 0;
-        counterA = counterB ? 0 : counterA;
+        delta = counterA - counterB;
+        counterB = delta < 0 ? -delta : 0;
+        counterA = delta > 0 ? delta : 0;
         for (;counterA > 0; counterA--) {
             headA = headA->next;
         }
