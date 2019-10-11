@@ -292,6 +292,7 @@ private:
             fast = fast->next->next;
             slow = slow->next;
         }
+        return slow;
     }
     ListNode* reverseList(ListNode* head) {
         ListNode* buf = head;
