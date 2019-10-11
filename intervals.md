@@ -51,3 +51,41 @@ public:
 };
 ```
 
+## Insert Interval
+https://leetcode.com/problems/insert-interval/
+
+T∈O(n)
+``` C++
+class Solution {
+public:
+    vector<vector<int>> insert(vector<vector<int>>& intervals, vector<int>& newInterval) {
+        if (intervals.empty())
+            return vector <vector <int>> {newInterval};
+        for (auto i = intervals.begin(); i != intervals.end(); i++) {
+            if ((*i)[0] > newInterval[0]) {
+                intervals.insert(i, newInterval);
+                break;
+            }
+            if (i == intervals.end() - 1) {
+                intervals.push_back(newInterval);
+                break;
+            }
+        }
+        return merge(intervals);
+    }
+private:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        vector <vector <int>> result;
+        for (int i = 0; i < intervals.size(); i++) {
+            int begin = intervals[i][0], end = intervals[i][1];
+            while (i < intervals.size() - 1 && end >= intervals[i + 1][0]) {
+                i++;
+                if (end <= intervals[i][1])
+                    end = intervals[i][1];
+            }
+            result.push_back(vector <int> {begin, end});
+        }
+        return result;
+    }
+};
+```
