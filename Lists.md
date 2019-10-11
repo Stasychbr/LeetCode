@@ -41,7 +41,7 @@ public:
     void reorderList(ListNode* head) {
         ListNode* middle, *buf = head;
         if (head) {
-            middle = GetMiddle(head);
+            middle = getMiddle(head);
             if (middle == head)
                 return;
             while (buf->next != middle) {
@@ -60,7 +60,7 @@ public:
     }
     
 private:
-    ListNode* GetMiddle(ListNode* head) {
+    ListNode* getMiddle(ListNode* head) {
         ListNode* fast = head, *slow = head;
         while (fast && fast->next) {
             fast = fast->next->next;
@@ -74,16 +74,16 @@ private:
         if (buf) {
             while (buf->next)
                 buf = buf->next;
-            RecursiveThing(head);
+            recursiveThing(head);
         }
         return buf;
     }
     
-    void RecursiveThing(ListNode* node) {
+    void recursiveThing(ListNode* node) {
         if (!node->next)
             return;
         else 
-            RecursiveThing(node->next);
+            recursiveThing(node->next);
         node->next->next = node;
         node->next = NULL;
     }
@@ -135,7 +135,7 @@ public:
 ```C++
 class Solution {
 public:
-    ListNode *detectCycle(ListNode *head) {
+    ListNode* detectCycle(ListNode *head) {
         ListNode* p = head, *t = head;
         int i, j;
         if (p) {
@@ -275,8 +275,8 @@ public:
             return true;
         if (!head->next)
             return true;
-        middle = GetMiddle(head);
-        middle = ReverseList(middle);
+        middle = getMiddle(head);
+        middle = reverseList(middle);
         while (middle) {
             if (head->val != middle->val)
                 return false;
@@ -286,27 +286,27 @@ public:
         return true;
     }
 private:
-    ListNode* GetMiddle(ListNode* head) {
+    ListNode* getMiddle(ListNode* head) {
         ListNode* fast = head, *slow = head;
         while (fast && fast->next) {
             fast = fast->next->next;
             slow = slow->next;
         }
     }
-    ListNode* ReverseList(ListNode* head) {
+    ListNode* reverseList(ListNode* head) {
         ListNode* buf = head;
         if (buf) {
             while (buf->next)
                 buf = buf->next;
-            RecursiveThing(head);
+            recursiveThing(head);
         }
         return buf;
     }
-    void RecursiveThing(ListNode* node) {
+    void recursiveThing(ListNode* node) {
         if (!node->next)
             return;
         else 
-            RecursiveThing(node->next);
+            recursiveThing(node->next);
         node->next->next = node;
         node->next = NULL;
     }
@@ -323,16 +323,16 @@ public:
         if (buf) {
             while (buf->next)
                 buf = buf->next;
-            RecursiveThing(head);
+            recursiveThing(head);
         }
         return buf;
     }
 private:
-    void RecursiveThing(ListNode* node) {
+    void recursiveThing(ListNode* node) {
         if (!node->next)
             return;
         else 
-            RecursiveThing(node->next);
+            recursiveThing(node->next);
         node->next->next = node;
         node->next = NULL;
     }
@@ -425,11 +425,11 @@ public:
     ListNode* sortList(ListNode* head) {
         if (!(head && head->next))
             return head;
-        return mergeTwoLists(sortList(head), sortList(SplitList(head)));
+        return mergeTwoLists(sortList(head), sortList(splitList(head)));
     }
     
 private:
-    ListNode* SplitList(ListNode* head) {
+    ListNode* splitList(ListNode* head) {
         ListNode* current = head, *previous = head, *annihilator;
         while (current && current->next) {
             current = current->next->next;
