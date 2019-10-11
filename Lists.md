@@ -431,14 +431,14 @@ public:
     
 private:
     ListNode* splitList(ListNode* head) {
-        ListNode* current = head, *previous = head, *annihilator;
-        while (current && current->next) {
-            current = current->next->next;
-            annihilator = previous;
-            previous = previous->next;
+        ListNode* fast = head, *slow = head, *annihilator;
+        while (fast && fast->next) {
+            fast = fast->next->next;
+            annihilator = slow;
+            slow = slow->next;
         }
         annihilator->next = NULL;
-        return previous;
+        return slow;
     }
     ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
         ListNode* result = NULL, *buf = NULL;
