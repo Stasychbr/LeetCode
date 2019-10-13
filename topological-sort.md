@@ -2,7 +2,7 @@
 ## Course Schedule
 https://leetcode.com/problems/course-schedule/
 
-T∈O(?)
+T∈O(n + m)
 ``` C++
 class Solution {
 public:
