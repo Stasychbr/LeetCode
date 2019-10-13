@@ -17,7 +17,6 @@ public:
                     return false;
             }
         }
-        
         return true;
     }
 private:
