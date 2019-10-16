@@ -101,3 +101,43 @@ private:
     }
 };
 ```
+
+## Path Sum
+https://leetcode.com/problems/path-sum/
+```c++
+class Solution {
+public:
+    bool hasPathSum(TreeNode* root, int sum) {
+        if (!root)
+            return false;
+        sum -= root->val;
+        if (!(root->left || root->right) && sum == 0)
+            return true;
+        return hasPathSum(root->left, sum) || hasPathSum(root->right, sum); 
+    }
+};
+```
+
+## Binary Tree Level Order Traversal
+https://leetcode.com/problems/binary-tree-level-order-traversal/
+```c++
+class Solution {
+public:
+    vector<vector<int>> levelOrder(TreeNode* root) {
+        vector <vector <int>> result;
+        recursiveThing(root, result, 0);
+        return result;
+    }
+private:
+    void recursiveThing(TreeNode* branch, vector <vector <int>>& tree, int level) {
+        if (!branch)
+            return;
+        if (level >= tree.size())
+            tree.push_back(vector <int> {branch->val});
+        else
+            tree[level].push_back(branch->val);
+        recursiveThing(branch->left, tree, level + 1);
+        recursiveThing(branch->right, tree, level + 1);
+    }
+};
+```
