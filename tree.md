@@ -9,6 +9,32 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
 ``` 
+
+## Binary Tree Inorder Traversal
+https://leetcode.com/problems/binary-tree-inorder-traversal/
+```c++
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector <int> result;
+        inOrder(root, result);
+        return result;
+    }
+private:
+    void inOrder(TreeNode* root, vector <int>& elements) {
+        if (!root) {
+            return;
+        }   
+        else {
+            inOrder(root->left, elements);
+            elements.push_back(root->val);
+            inOrder(root->right, elements);
+        }
+        
+    } 
+};
+```
+
 ## Symmetric Tree
 https://leetcode.com/problems/symmetric-tree/
 ```c++
@@ -139,5 +165,60 @@ private:
         recursiveThing(branch->left, tree, level + 1);
         recursiveThing(branch->right, tree, level + 1);
     }
+};
+```
+
+## Subtree of Another Tree
+https://leetcode.com/problems/subtree-of-another-tree/
+```c++
+class Solution {
+public:
+    bool isSubtree(TreeNode* s, TreeNode* t) {
+        if (!s)
+            return false;
+        if (s->val == t->val) {
+            if (isSame(s, t))
+                return true;
+        }
+        return isSubtree(s->left, t) || isSubtree(s->right, t);
+    }
+private:
+    bool isSame(TreeNode* leftBranch, TreeNode* rightBranch) {
+        if (!leftBranch && rightBranch || !rightBranch && leftBranch)
+            return false;
+        else {
+            if (!leftBranch)
+                return true;
+            else
+                return leftBranch->val == rightBranch->val && 
+                isSame(leftBranch->left, rightBranch->left) &&
+                isSame(leftBranch->right, rightBranch->right);
+        }
+    }
+};
+```
+
+## th Smallest Element in a BST
+https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+```c++
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        vector <int> elements;
+        inOrder(root, elements);
+        return elements[k - 1];
+    }
+private:
+    void inOrder(TreeNode* root, vector <int>& elements) {
+        if (!root) {
+            return;
+        }   
+        else {
+            inOrder(root->left, elements);
+            elements.push_back(root->val);
+            inOrder(root->right, elements);
+        }
+        
+    } 
 };
 ```
