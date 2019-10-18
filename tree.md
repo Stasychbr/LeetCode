@@ -68,9 +68,7 @@ https://leetcode.com/problems/maximum-depth-of-binary-tree/
 class Solution {
 public:
     int maxDepth(TreeNode* root) {
-        if (!root)
-            return 0;
-        return max(recursiveThing(root->left, 1), recursiveThing(root->right, 1));
+        return recursiveThing(root, 0);
     }
 private:
     int recursiveThing(TreeNode* leaf, int depth) {
@@ -198,8 +196,11 @@ private:
 };
 ```
 
-## th Smallest Element in a BST
+## Kth Smallest Element in a BST
 https://leetcode.com/problems/kth-smallest-element-in-a-bst/
+
+### Depth
+T∈O(n)
 ```c++
 class Solution {
 public:
@@ -220,5 +221,28 @@ private:
         }
         
     } 
+};
+```
+
+### Breadth
+T∈O(h + k)
+```c++
+class Solution {
+public:
+    int kthSmallest(TreeNode* root, int k) {
+        stack <TreeNode*> roots;
+        TreeNode* Kth;
+        while (k > 0) { 
+            while (root) {
+                roots.push(root);
+                root = root->left;
+            }
+            Kth = roots.top();
+            roots.pop();
+            k--;
+            root = Kth->right;
+        }
+        return Kth->val;
+    }
 };
 ```
