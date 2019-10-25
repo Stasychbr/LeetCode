@@ -27,17 +27,17 @@ public:
         if (!N)
             return 0;
         else 
-            MemRecu(N, a);
+            MemoRecu(N, a);
         return a[N];
     }
 private:
-    void MemRecu(int n, int* a) {
+    void MemoRecu(int n, int* a) {
         if (n == 1) {
             a[0] = 0;
             a[1] = 1;
             return;
         }
-        MemRecu(n - 1, a); 
+        MemoRecu(n - 1, a); 
         a[n] = a[n - 2] + a[n - 1];
     }
 };
@@ -48,10 +48,10 @@ T∈O(n)
 class Solution {
 public:
     int fib(int N) {
-        return DullIter(N);
+        return IterativeMeth(N);
     }
 private:
-    int DullIter(int n) {
+    int IterativeMeth(int n) {
         int seq[2] = {0, 1}, i;
         for (i = 2; i <= n; i++) {
             seq[i % 2] = seq[0] + seq[1];
