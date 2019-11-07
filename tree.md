@@ -318,3 +318,115 @@ public:
     }
 };
 ```
+
+## Validate Binary Search Tree
+https://leetcode.com/problems/validate-binary-search-tree/
+```c++
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        if (root) {
+            vector <int> inOrderTr;
+            inOrder(root, inOrderTr);
+            for (auto i = inOrderTr.end() - 1; i > inOrderTr.begin(); i--) {
+                if (*i <= *(i - 1))
+                    return false;
+            }
+        }
+        return true;
+    }
+private:
+    void inOrder(TreeNode* root, vector <int>& elements) {
+        if (!root) {
+            return;
+        }   
+        else {
+            inOrder(root->left, elements);
+            elements.push_back(root->val);
+            inOrder(root->right, elements);
+        }
+        
+    } 
+};
+```
+
+## Binary Search Tree Iterator
+https://leetcode.com/problems/binary-search-tree-iterator/
+```c++
+class BSTIterator {
+public:
+    BSTIterator(TreeNode* root) {
+        inOrder(root, inOrderTr);
+    }
+    
+    /** @return the next smallest number */
+    int next() {
+        int result = inOrderTr.front();
+        inOrderTr.pop();
+        return result;
+    }
+    
+    /** @return whether we have a next smallest number */
+    bool hasNext() {
+        return !inOrderTr.empty();
+    }
+private:
+    queue <int> inOrderTr;
+    void inOrder(TreeNode* root, queue <int>& elements) {
+        if (!root) {
+            return;
+        }   
+        else {
+            inOrder(root->left, elements);
+            elements.push(root->val);
+            inOrder(root->right, elements);
+        }
+        
+    } 
+};
+
+/**
+ * Your BSTIterator object will be instantiated and called as such:
+ * BSTIterator* obj = new BSTIterator(root);
+ * int param_1 = obj->next();
+ * bool param_2 = obj->hasNext();
+ */
+ ```
+ 
+ ## Inorder Successor in BST
+ https://www.lintcode.com/problem/inorder-successor-in-bst/
+ ```c++
+ class Solution {
+public:
+    /*
+     * @param root: The root of the BST.
+     * @param p: You need find the successor node of p.
+     * @return: Successor of p.
+     */
+    TreeNode * inorderSuccessor(TreeNode * root, TreeNode * p) {
+        TreeNode* result = NULL;
+        if (!root)
+            return NULL;
+        if (p->right) {
+            result = p->right;
+            for (; result->left; result = result->left);
+            return result;
+        }
+        if (root->left == p)
+            return root;
+        else {
+            while (root != p) {
+                if (root->val > p->val) {
+                    result = root;
+                    root = root->left;
+                }
+                else {
+                    root = root->right;
+                }
+            }
+            return result;
+                
+        }
+    }
+};
+```
