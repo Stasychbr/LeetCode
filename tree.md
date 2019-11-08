@@ -12,6 +12,7 @@ struct TreeNode {
 
 ## Binary Tree Inorder Traversal
 https://leetcode.com/problems/binary-tree-inorder-traversal/
+### Recursion:
 ```c++
 class Solution {
 public:
@@ -34,6 +35,28 @@ private:
     } 
 };
 ```
+### Iterative:
+```c++
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector <int> result;
+        stack <TreeNode*> treeStack;
+        TreeNode* current = root;
+        while (current || !treeStack.empty()) {
+            while (current) {
+                treeStack.push(current);
+                current = current->left;
+            }
+            current = treeStack.top();
+            treeStack.pop();
+            result.push_back(current->val);
+            current = current->right;
+        }
+        return result;
+    }
+};
+```
 
 ## Symmetric Tree
 https://leetcode.com/problems/symmetric-tree/
@@ -48,11 +71,11 @@ public:
     }
 private:
     bool recursiveThing(TreeNode* leftBranch, TreeNode* rightBranch) {
-        if (!leftBranch && rightBranch || !rightBranch && leftBranch)
-            return false;
+        if (!leftBranch && !rightBranch)
+            return true;
         else {
-            if (!leftBranch)
-                return true;
+            if (!leftBranch || !rightBranch)
+                return false;
             else
                 return leftBranch->val == rightBranch->val && 
                 recursiveThing(leftBranch->left, rightBranch->right) &&
@@ -92,11 +115,11 @@ public:
     }
 private:
      bool recursiveThing(TreeNode* leftBranch, TreeNode* rightBranch) {
-        if (!leftBranch && rightBranch || !rightBranch && leftBranch)
-            return false;
+        if (!leftBranch && !rightBranch)
+            return true;
         else {
-            if (!leftBranch)
-                return true;
+            if (!leftBranch || !rightBranch)
+                return false;
             else
                 return leftBranch->val == rightBranch->val && 
                 recursiveThing(leftBranch->left, rightBranch->left) &&
@@ -203,10 +226,8 @@ public:
     bool isSubtree(TreeNode* s, TreeNode* t) {
         if (!s)
             return false;
-        if (s->val == t->val) {
-            if (isSame(s, t))
-                return true;
-        }
+        if (isSame(s, t))
+            return true;
         return isSubtree(s->left, t) || isSubtree(s->right, t);
     }
 private:
@@ -321,6 +342,7 @@ public:
 
 ## Validate Binary Search Tree
 https://leetcode.com/problems/validate-binary-search-tree/
+### Recursive
 ```c++
 class Solution {
 public:
@@ -335,21 +357,34 @@ public:
         }
         return true;
     }
-private:
-    void inOrder(TreeNode* root, vector <int>& elements) {
-        if (!root) {
-            return;
-        }   
-        else {
-            inOrder(root->left, elements);
-            elements.push_back(root->val);
-            inOrder(root->right, elements);
+```
+### Iterative
+```c++
+class Solution {
+public:
+    bool isValidBST(TreeNode* root) {
+        int lastElem = INT_MIN;
+        int flag = 0;
+        stack <TreeNode*> treeStack;
+        TreeNode* current = root;
+        while (current || !treeStack.empty()) {
+            while (current) {
+                treeStack.push(current);
+                current = current->left;
+            }
+            current = treeStack.top();
+            treeStack.pop();
+            if (flag && current->val <= lastElem) {
+                return false;
+            }
+            lastElem = current->val;
+            current = current->right;
+            flag = 1;
         }
-        
-    } 
+        return true;
+    }
 };
 ```
-
 ## Binary Search Tree Iterator
 https://leetcode.com/problems/binary-search-tree-iterator/
 ```c++
@@ -412,8 +447,6 @@ public:
             for (; result->left; result = result->left);
             return result;
         }
-        if (root->left == p)
-            return root;
         else {
             while (root != p) {
                 if (root->val > p->val) {
