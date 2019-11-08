@@ -76,6 +76,7 @@ private:
 ```
 
 ## Alien dictionary
+### LintCode (without lexicographically sorting)
 https://www.lintcode.com/problem/alien-dictionary
 
 T∈O(n + m) 
@@ -132,6 +133,36 @@ private:
         colors[parent] = 2;
         if (mask.find(parent) != mask.end())
             route.push_back(parent + 'a');
+        return true;
+    }
+};
+```
+### LeetCode
+https://leetcode.com/problems/verifying-an-alien-dictionary/
+```c++
+class Solution {
+public:
+    bool isAlienSorted(vector<string>& words, string order) {
+        int alphabet[26];
+        for (int i = 0; i < order.length(); i++)
+            alphabet[order[i] - 'a'] = i;
+        for (int i = 0; i < words.size() - 1; i++) {
+            string word1 = words[i];
+            string word2 = words[i + 1];
+            int length = min(word1.length(), word2.length());
+            int flag = 0;
+            for (int j = 0; j < length; j++) {
+                if (word1[j] != word2[j]) {
+                    if (alphabet[word1[j] - 'a'] > alphabet[word2[j] - 'a']) {
+                        return false;
+                    }
+                    flag = 1;
+                    break;
+                }
+            }
+            if (!flag && word1.length() > word2.length())
+                return false;
+        }
         return true;
     }
 };
