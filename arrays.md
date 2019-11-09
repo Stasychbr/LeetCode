@@ -57,8 +57,6 @@ public:
         vector <int>:: iterator left = nums.begin(), right = nums.end() - 1, inside;
         int triplet;
         sort(nums.begin(), nums.end());
-        if (*left > 0 || *right < 0)
-            return result;
         for (left = nums.begin(); left + 2 < nums.end(); left++) {
             if (left != nums.begin() && *left == *(left - 1))
                 continue;
