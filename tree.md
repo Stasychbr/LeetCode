@@ -98,8 +98,8 @@ private:
         if (!leaf)
             return depth;
         depth++;
-        int left = leaf->left ? recursiveThing(leaf->left, depth) : depth;
-        int right = leaf->right ? recursiveThing(leaf->right, depth) : depth;
+        int left = recursiveThing(leaf->left, depth);
+        int right = recursiveThing(leaf->right, depth);
         return max(left, right); 
     }
 };
