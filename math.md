@@ -93,6 +93,7 @@ private:
 ```
 
 # Count Primes
+https://leetcode.com/problems/count-primes/
 ``` c++
 class Solution {
 public:
