@@ -91,3 +91,26 @@ private:
    }
 };
 ```
+
+# Count Primes
+``` c++
+class Solution {
+public:
+    int countPrimes(int n) {
+        int counter = 0;
+        unsigned long int i = 2;
+        vector <int> sieve(n, 0);
+        while (i < n) {
+            if (sieve[i] == 1) {
+                i++;
+                continue;
+            }
+            counter++;
+            for (unsigned long int j = i * i; j < n; j += i)
+                sieve[j] = 1;
+            i++;
+        }
+        return counter;
+    }
+};
+```
