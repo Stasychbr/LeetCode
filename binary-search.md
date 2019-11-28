@@ -67,3 +67,24 @@ private:
     }
 };
 ```
+
+# Find Minimum in Rotated Sorted Array
+https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
+``` c++
+class Solution {
+public:
+    int findMin(vector<int>& nums) {
+        int right = nums.size() - 1, left = 0, middle;
+        if (nums[right] > nums[left])
+            return nums[left];
+        while (right - left > 1) {
+            middle = (left + right) / 2;
+            if (nums[middle] < nums[0])
+                right = middle;
+            else
+                left = middle;
+        }
+        return nums[left] < nums[right] ? nums[left] : nums[right];
+    }
+};
+```
