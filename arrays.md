@@ -124,3 +124,24 @@ public:
 };
 ```
 
+## Maximum Product Subarray
+https://leetcode.com/problems/maximum-product-subarray/
+```c++
+class Solution {
+public:
+    int maxProduct(vector<int>& nums) {
+        if (nums.empty())
+            return 0;
+        int res = nums[0];
+        int maxProd = 1;
+        int minProd = 1;
+        for (int i = 0; i < nums.size(); i++) {
+            int tmp = minProd;
+            minProd = min(min(minProd * nums[i], maxProd * nums[i]), nums[i]);
+            maxProd = max(max(tmp * nums[i], maxProd * nums[i]), nums[i]);
+            res = max(maxProd, res);
+        }
+        return res;
+    }
+};
+```
