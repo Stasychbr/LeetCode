@@ -1,3 +1,14 @@
++ [Longest Substring Without Repeating Characters](#longest-substring-without-repeating-characters)
++ [Longest Repeating Character Replacement](#longest-repeating-character-replacement)
++ [Minimum Window Substring](#minimum-window-substring)
++ [Group Anagrams](#group-anagrams)
++ [Valid Parentheses](#valid-parentheses)
++ [Generate Parentheses](#generate-parentheses)
++ [Valid Palindrome](#valid-palindrome)
++ [Longest Palindromic Substring](#longest-palindromic-substring)
++ [Palindromic Substrings](#palindromic-substrings)
++ [Is Subsequence](#is-subsequence)
+
 # Longest Substring Without Repeating Characters
 https://leetcode.com/problems/longest-substring-without-repeating-characters/
 ```c++
