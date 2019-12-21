@@ -1,5 +1,20 @@
 # Dynamic programming
 
++ [Backpack](#backpack)
++ [Climbing Stairs](#climbing-stairs)
++ [Coin Change](#coin-change)
++ [Longest Increasing Subsequence](#longest-increasing-subsequence)
++ [Longest Common Subsequence](#longest-common-subsequence)
++ [Word Break](#word-break)
++ [Unique Paths](#unique-paths)
++ [Unique Paths II](#unique-paths-ii)
++ [Jump Game](#jump-game)
++ [Jump Game II](#jump-game-ii)
++ [House Robber](#house-robber)
++ [House Robber II](#house-robber-ii)
++ [Decode Ways](#decode-ways)
++ [Coin Change 2](#coin-change-2)
+
 ## Backpack
 https://stepik.org/lesson/13259/step/5?unit=3444
 ```c++
