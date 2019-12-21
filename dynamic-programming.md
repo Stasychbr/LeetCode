@@ -1,5 +1,32 @@
 # Dynamic programming
 
+## Backpack
+https://stepik.org/lesson/13259/step/5?unit=3444
+```c++
+#include <iostream>
+#include <vector>
+
+int main() {
+  int W, n;
+  std::cin >> W >> n;
+  std::vector <std::vector<int>> maxValue(n + 1, std::vector<int>(W + 1));
+  for (int i = 1; i <= n; i++) {
+    int num;
+    std::cin >> num;
+    for (int j = 1; j <= W; j++) {
+      if (num > j) {
+        maxValue[i][j] = maxValue[i - 1][j];
+      }
+      else {
+        maxValue[i][j] = std::max(maxValue[i - 1][j], maxValue[i - 1][j - num] + num);
+      }
+    }
+  }
+  std::cout << maxValue[n][W];
+  return 0;
+}
+```
+
 ## Climbing Stairs
 https://leetcode.com/problems/climbing-stairs/
 
@@ -45,7 +72,7 @@ public:
 };
 ```
 
-# Coin Change
+## Coin Change
 https://leetcode.com/problems/coin-change/
 ```c++
 class Solution {
@@ -66,7 +93,7 @@ public:
 };
 ```
 
-# Longest Increasing Subsequence
+## Longest Increasing Subsequence
 https://leetcode.com/problems/longest-increasing-subsequence/
 ```c++
 class Solution {
@@ -93,7 +120,7 @@ public:
 };
 ```
 
-# Longest Common Subsequence
+## Longest Common Subsequence
 https://leetcode.com/problems/longest-common-subsequence/
 ```c++
 class Solution {
@@ -115,7 +142,7 @@ public:
 };
 ```
 
-# Word Break
+## Word Break
 https://leetcode.com/problems/word-break/
 ```c++
 class Solution {
@@ -148,7 +175,7 @@ private:
     }
 };
 ```
-# Unique Paths
+## Unique Paths
 https://leetcode.com/problems/unique-paths/
 ```c++
 class Solution {
@@ -166,7 +193,7 @@ public:
 };
 ```
 
-# Unique Paths II
+## Unique Paths II
 https://leetcode.com/problems/unique-paths-ii/
 ```c++
 class Solution {
@@ -188,7 +215,7 @@ public:
 };
 ```
 
-# Jump Game
+## Jump Game
 https://leetcode.com/problems/jump-game/
 ```c++
 class Solution {
@@ -210,7 +237,7 @@ public:
 };
 ```
 
-# Jump Game II
+## Jump Game II
 https://leetcode.com/problems/jump-game-ii/
 ```c++
 class Solution {
@@ -233,7 +260,7 @@ public:
 };
 ```
 
-# House Robber
+## House Robber
 https://leetcode.com/problems/house-robber/
 ```c++
 class Solution {
@@ -250,7 +277,7 @@ public:
 };
 ```
 
-# House Robber II
+## House Robber II
 https://leetcode.com/problems/house-robber-ii/
 ```c++
 class Solution {
@@ -271,6 +298,51 @@ private:
             cur = max(tmp + nums[i], prev);
         }
         return cur;
+    }
+};
+```
+
+## Decode Ways
+https://leetcode.com/problems/decode-ways/
+```c++
+class Solution {
+public:
+    int numDecodings(string s) {
+        int prev = 0, cur = 1;
+        for (int i = 0; i < s.length(); i++) {
+            if (s[i] == '0') {
+                cur = 0;
+            }
+            int tmp = cur + prev;
+            if (cur == 0 && prev == 0) {
+                return 0;
+            }
+            if (s[i] == '1' || s[i] == '2' && s[i + 1] <= '6') {
+                prev = cur;
+            }
+            else
+                prev = 0;
+            cur = tmp;
+        }
+        return cur;
+    }
+};
+```
+
+## Coin Change 2
+https://leetcode.com/problems/coin-change-2/
+```c++
+class Solution {
+public:
+    int change(int amount, vector<int>& coins) {
+        vector <int> vars(amount + 1);
+        vars[0] = 1;
+        for (int i = 0; i < coins.size(); i++) {
+            for (int j = coins[i]; j <= amount; j++) {
+                vars[j] += vars[j - coins[i]];
+            }
+        }
+        return vars[amount];
     }
 };
 ```
