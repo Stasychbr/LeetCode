@@ -131,57 +131,24 @@ https://leetcode.com/problems/valid-parentheses/
 class Solution {
 public:
     bool isValid(string s) {
-        int bracketNumber[3][2] = {{0}};
-        stack <char> openBrackets;
-        for (char ch: s) {
-            if (ch != '(' && ch != ')' 
-                && ch != '{' && ch != '}'
-                && ch != '[' && ch != ']') {
-                continue;
-            }
-            if (ch == '(' || ch == ')') {
-                if (ch == ')') {
-                    if (openBrackets.empty() || openBrackets.top() != '(')
-                        return false;
-                    bracketNumber[0][1]++;
-                    openBrackets.pop();
-                }
-                else {
-                    openBrackets.push(ch);
-                    bracketNumber[0][0]++;
-                }
-            }
-            if (ch == '{' || ch == '}') {
-                if (ch == '}') {
-                    if (openBrackets.empty() || openBrackets.top() != '{')
-                        return false;
-                    bracketNumber[1][1]++;
-                    openBrackets.pop();
-                }
-                else {
-                    openBrackets.push(ch);
-                    bracketNumber[1][0]++;
-                }
-            }
-            if (ch == '[' || ch == ']') {
-               if (ch == ']') {
-                    if (openBrackets.empty() || openBrackets.top() != '[')
-                        return false;
-                    bracketNumber[2][1]++;
-                   openBrackets.pop();
-                }
-                else {
-                    openBrackets.push(ch);
-                    bracketNumber[2][0]++;
-                }
-            }
-        }
-        if (bracketNumber[0][0] != bracketNumber[0][1] ||
-                bracketNumber[1][0] != bracketNumber[1][1] ||
-                bracketNumber[2][0] != bracketNumber[2][1]) {
-                return false;    
-            }
-        return true;
+        stack<int> parent;
+    for (int i = 0; i < s.size(); i++) {
+      switch (s[i]) {
+        case '(':
+          parent.push(')');
+          break;
+        case '[':
+          parent.push(']');
+          break;
+        case '{':
+          parent.push('}');
+          break;
+        default:
+          if (parent.empty() || parent.top() != s[i]) return false;
+          parent.pop();
+      }
+    }
+    return parent.empty();
     }
 };
 ```
