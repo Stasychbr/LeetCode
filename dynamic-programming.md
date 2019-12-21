@@ -115,6 +115,39 @@ public:
 };
 ```
 
+# Word Break
+https://leetcode.com/problems/word-break/
+```c++
+class Solution {
+public:
+    bool wordBreak(string s, vector<string>& wordDict) {
+        unordered_set<string> wordSet(wordDict.begin(), wordDict.end());
+        unordered_map<string, bool> memo;
+        return wordBreakHelp(s, wordSet, memo);
+    }
+private:
+    bool wordBreakHelp(string& s, unordered_set<string>& wordSet,
+                       unordered_map<string, bool>& memo) {
+        if (memo.find(s) != memo.end()) {
+            return memo[s];
+        }
+        if (wordSet.find(s) != wordSet.end()) {
+            return memo[s] = true;
+        }
+        for (int i = 1; i < s.size(); i++) {
+            string rightPart = s.substr(i);
+            if (wordSet.find(rightPart) == wordSet.end()) {
+                continue;
+            }
+            string leftPart = s.substr(0, i);
+            if (wordBreakHelp(leftPart, wordSet, memo)) {
+                return memo[s] = true;
+            }
+        }
+        return memo[s] = false;
+    }
+};
+```
 # Unique Paths
 https://leetcode.com/problems/unique-paths/
 ```c++
@@ -151,6 +184,93 @@ public:
             }
         }
         return ways[m - 1][n - 1];
+    }
+};
+```
+
+# Jump Game
+https://leetcode.com/problems/jump-game/
+```c++
+class Solution {
+public:
+    bool canJump(vector<int>& nums) {
+        vector <bool> tries(nums.size());
+        tries[nums.size() - 1] = true;
+        for (int i = nums.size() - 2; i >= 0; i--) {
+            int furthest = min(i + nums[i], (int)nums.size() - 1);
+            for (int j = i + 1; j <= furthest; j++) {
+                if (tries[j] == true) {
+                    tries[i] = true;
+                    break;
+                }
+            }
+        }
+        return tries[0];
+    }
+};
+```
+
+# Jump Game II
+https://leetcode.com/problems/jump-game-ii/
+```c++
+class Solution {
+public:
+    int jump(vector<int>& nums) {
+        int result = 0, lastReached = 0;
+        int canReach = 0;
+        for (int i = 0; i < nums.size() - 1; i++) {
+            if (lastReached >= nums.size() - 1) {
+              break;
+            }
+            canReach = max(canReach, i + nums[i]);
+            if (i == lastReached) {
+                result++;
+                lastReached = canReach;
+            }
+        }
+        return result;
+    }
+};
+```
+
+# House Robber
+https://leetcode.com/problems/house-robber/
+```c++
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        int cur = 0, prev = 0;
+        for (int i = 0; i < nums.size(); i++) {
+            int tmp = prev;
+            prev = cur;
+            cur = max(tmp + nums[i], prev);
+        }
+        return cur;
+    }
+};
+```
+
+# House Robber II
+https://leetcode.com/problems/house-robber-ii/
+```c++
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        if (nums.size() == 1) {
+            return nums[0];
+        }
+        return max(robCircle(nums, 0, nums.size() - 1), robCircle(nums, 1, nums.size()));
+        
+    }
+private:
+    int robCircle(vector<int>& nums, int start, int end) {
+        int cur = 0, prev = 0;
+        for (int i = start; i < end; i++) {
+            int tmp = prev;
+            prev = cur;
+            cur = max(tmp + nums[i], prev);
+        }
+        return cur;
     }
 };
 ```
