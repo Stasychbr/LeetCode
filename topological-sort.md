@@ -1,4 +1,9 @@
-# Topological sort (devil incarnate)
+# Topological sort tasks
+
++ [Course Schedule](#course-schedule)
++ [Course Schedule II](#course-schedule-ii)
++ [Alien Dictionary](#alien-dictionary)
+
 ## Course Schedule
 https://leetcode.com/problems/course-schedule/
 
