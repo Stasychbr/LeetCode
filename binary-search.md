@@ -1,4 +1,9 @@
 # Binary Search
++ [Binary Search](#binary-search)
++ [Search in Rotated Sorted Array](#search-in-rotated-sorted-array)
++ [Find Minimum in Rotated Sorted Array](#find-minimum-in-rotated-sorted-array)
++ [Find K Closest Elements](#find-k-closest-elements)
+## Basic Binary Search
 https://leetcode.com/problems/binary-search/
 ``` c++
 class Solution {
@@ -22,7 +27,7 @@ public:
 };
 ```
 
-# Search in Rotated Sorted Array
+## Search in Rotated Sorted Array
 https://leetcode.com/problems/search-in-rotated-sorted-array/
 ```c++
 class Solution {
@@ -68,7 +73,7 @@ private:
 };
 ```
 
-# Find Minimum in Rotated Sorted Array
+## Find Minimum in Rotated Sorted Array
 https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/
 ``` c++
 class Solution {
