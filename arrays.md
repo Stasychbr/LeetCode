@@ -1,4 +1,9 @@
-# Tasks with the sum
+# Tasks with the arrays
++ [Two Sum](#two-sum)
++ [Three Sum](#three-sum)
++ [Subarray Sum Equals K](#subarray-sum-equals-k)
++ [Maximum Subarray](#maximum-subarray)
++ [Maximum Product Subarray](#maximum-product-subarray)
 ## Two sum
 https://leetcode.com/problems/two-sum/
 ### Dumb solution 
@@ -43,7 +48,7 @@ public:
 };
 ```
 
-## Three sum (devil's toy)
+## Three sum
 https://leetcode.com/problems/3sum/
 
 T∈O(n^2)
