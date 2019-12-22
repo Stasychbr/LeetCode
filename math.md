@@ -1,6 +1,10 @@
-# Fibonacci numbers
+# Mathematics
++ [Fibonacci Number](#fibonacci-numbers)
++ [Count Primes](#count-primes)
+
+## Fibonacci numbers
 https://leetcode.com/problems/fibonacci-number
-## Recursive method
+### Recursive method
 T∈O(φ^n)
 ``` C++
 class Solution {
@@ -17,7 +21,7 @@ private:
     }
 };
 ```
-## Recursive with memoization
+### Recursive with memoization
 T∈O(n)
 ``` C++
 class Solution {
@@ -42,7 +46,7 @@ private:
     }
 };
 ```
-## Iterative method
+### Iterative method
 T∈O(n)
 ``` C++
 class Solution {
@@ -60,7 +64,7 @@ private:
     }
 };
 ```
-## Pavel Olegovich's method
+### Pavel Olegovich's method
 T∈O(log n)
 ``` C++
 class Solution {
@@ -92,7 +96,7 @@ private:
 };
 ```
 
-# Count Primes
+## Count Primes
 https://leetcode.com/problems/count-primes/
 ``` c++
 class Solution {
