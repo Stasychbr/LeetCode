@@ -1,4 +1,16 @@
-# Lists (homework 1)
+# List
++ [Reorder List](#reorder-list)
++ [Linked List Cycle II](#linked-list-cycle-ii)
++ [Linked List Cycle](#linked-list-cycle)
++ [Merge Two Sorted Lists](#merge-two-sorted-lists)
++ [Remove Nth Node From End of List](#remove-nth-node-from-end-of-list)
++ [Middle of the Linked List](#middle-of-the-linked-list)
++ [Delete Node in a Linked List](#delete-node-in-a-linked-list)
++ [Palindrome Linked List](#palindrome-linked-list)
++ [Reverse Linked List](#reverse-linked-list)
++ [Remove Linked List Elements](#remove-linked-list-elements)
++ [Intersection of Two Linked Lists](#intersection-of-two-linked-lists)
++ [Sort List](#sort-list)
 
 Definition for singly-linked list:
 
@@ -10,6 +22,8 @@ struct ListNode {
  };
  ```
 ## Reorder List
+https://leetcode.com/problems/reorder-list/
+
 ### Cozy slow way
 ```C++
 class Solution {
@@ -91,6 +105,8 @@ private:
 ```
 
 ## Linked List Cycle
+https://leetcode.com/problems/linked-list-cycle
+
 ### Dumb way
 ```C++
 class Solution {
@@ -132,6 +148,7 @@ public:
 ```
 
 ## Linked List Cycle II
+https://leetcode.com/problems/linked-list-cycle-ii
 ```C++
 class Solution {
 public:
@@ -151,6 +168,7 @@ public:
 ```
 
 ## Merge Two Sorted Lists
+https://leetcode.com/problems/merge-two-sorted-lists
 ```C++
 class Solution {
 public:
@@ -184,6 +202,7 @@ public:
 ```
 
 ## Remove Nth Node From End of List
+https://leetcode.com/problems/remove-nth-node-from-end-of-list/
 ```C++
 class Solution {
 public:
@@ -221,6 +240,7 @@ public:
 ```
 
 ## Middle of the Linked List
+https://leetcode.com/problems/middle-of-the-linked-list/
 ### Version 1:
 ```C++
 class Solution {
@@ -253,6 +273,7 @@ public:
 ```
 
 ## Delete Node in a Linked List
+https://leetcode.com/problems/delete-node-in-a-linked-list/
 ```C++
 class Solution {
 public:
@@ -266,6 +287,7 @@ public:
 ```
 
 ## Palindrome Linked List
+https://leetcode.com/problems/palindrome-linked-list/
 ```C++
 class Solution {
 public:
@@ -315,6 +337,8 @@ private:
 ```
 
 ## Reverse Linked List
+https://leetcode.com/problems/reverse-linked-list/
+
 ### Recursive way
 ```C++
 class Solution {
@@ -360,6 +384,7 @@ public:
 ```
 
 ## Remove Linked List Elements
+https://leetcode.com/problems/remove-linked-list-elements/
 ```C++
 class Solution {
 public:
@@ -391,6 +416,7 @@ public:
 ```
 
 ## Intersection of Two Linked Lists
+https://leetcode.com/problems/intersection-of-two-linked-lists/
 ```C++
 class Solution {
 public:
@@ -420,6 +446,7 @@ public:
 ```
 
 ## Sort List
+https://leetcode.com/problems/sort-list/
 ```C++
 class Solution {
 public:
